@@ -2,6 +2,7 @@ package com.kama.minispring.beans.factory.support;
 
 import com.kama.minispring.beans.BeansException;
 import com.kama.minispring.beans.factory.BeanFactory;
+import com.kama.minispring.beans.factory.ObjectFactory;
 import com.kama.minispring.beans.factory.config.BeanDefinition;
 import com.kama.minispring.beans.factory.config.BeanDefinitionHolder;
 import com.kama.minispring.beans.factory.config.ConstructorArgumentValue;
@@ -12,14 +13,13 @@ import org.slf4j.LoggerFactory;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Supplier;
 
 /**
  * BeanFactory接口的默认实现
- * 基于列表的bean工厂实现，支持单例bean的注册、别名机制和依赖注入
+ * 基于列表的bean工厂实现，支持单例bean的注册、别名机制、依赖注入和循环依赖处理
  *
  * @author kama
  * @version 1.0.0
@@ -28,8 +28,17 @@ public class DefaultListableBeanFactory extends SimpleAliasRegistry implements B
     
     private static final Logger logger = LoggerFactory.getLogger(DefaultListableBeanFactory.class);
     
-    /** 存储单例bean的容器 */
+    /** 一级缓存：存储完全初始化好的单例bean */
     private final Map<String, Object> singletonObjects = new ConcurrentHashMap<>(256);
+    
+    /** 二级缓存：存储早期的单例bean对象（未完全初始化） */
+    private final Map<String, Object> earlySingletonObjects = new ConcurrentHashMap<>(16);
+    
+    /** 三级缓存：存储单例bean的工厂对象 */
+    private final Map<String, ObjectFactory<?>> singletonFactories = new ConcurrentHashMap<>(16);
+    
+    /** 存储当前正在创建的bean名称 */
+    private final Set<String> singletonsCurrentlyInCreation = Collections.newSetFromMap(new ConcurrentHashMap<>(16));
     
     /** 存储bean定义的容器 */
     private final Map<String, BeanDefinitionHolder> beanDefinitionMap = new ConcurrentHashMap<>(256);
@@ -41,15 +50,30 @@ public class DefaultListableBeanFactory extends SimpleAliasRegistry implements B
         BeanDefinition beanDefinition = holder.getBeanDefinition();
         
         if (beanDefinition.isSingleton()) {
+            // 首先检查一级缓存
             Object singleton = singletonObjects.get(beanName);
             if (singleton != null) {
-                logger.debug("Found singleton bean '{}'", beanName);
+                logger.debug("Found singleton bean '{}' in primary cache", beanName);
                 return singleton;
             }
             
-            singleton = createBean(beanName, holder);
-            singletonObjects.put(beanName, singleton);
-            logger.debug("Instantiated singleton bean '{}'", beanName);
+            // 检查是否存在循环依赖
+            singleton = getSingletonEarly(beanName);
+            if (singleton != null) {
+                return singleton;
+            }
+            
+            // 标记bean正在创建中
+            beforeSingletonCreation(beanName);
+            try {
+                // 创建bean实例
+                singleton = createBean(beanName, holder);
+                // 将完全初始化的bean放入一级缓存
+                addSingleton(beanName, singleton);
+            } finally {
+                // 移除创建中的标记
+                afterSingletonCreation(beanName);
+            }
             return singleton;
         } else {
             // 如果是原型bean，每次都创建新实例
@@ -60,12 +84,33 @@ public class DefaultListableBeanFactory extends SimpleAliasRegistry implements B
     }
     
     /**
+     * 获取早期的单例bean（用于处理循环依赖）
+     */
+    protected Object getSingletonEarly(String beanName) {
+        // 检查二级缓存
+        Object singleton = earlySingletonObjects.get(beanName);
+        if (singleton == null && isSingletonCurrentlyInCreation(beanName)) {
+            synchronized (this.singletonObjects) {
+                // 再次检查二级缓存
+                singleton = earlySingletonObjects.get(beanName);
+                if (singleton == null) {
+                    // 检查三级缓存
+                    ObjectFactory<?> factory = singletonFactories.get(beanName);
+                    if (factory != null) {
+                        // 从工厂获取对象并放入二级缓存
+                        singleton = factory.getObject();
+                        earlySingletonObjects.put(beanName, singleton);
+                        singletonFactories.remove(beanName);
+                        logger.debug("Created early reference for singleton bean '{}'", beanName);
+                    }
+                }
+            }
+        }
+        return singleton;
+    }
+    
+    /**
      * 创建bean实例
-     *
-     * @param name bean的名称
-     * @param holder bean定义的持有者
-     * @return bean实例
-     * @throws BeansException 如果创建bean失败
      */
     protected Object createBean(String name, BeanDefinitionHolder holder) throws BeansException {
         BeanDefinition beanDefinition = holder.getBeanDefinition();
@@ -93,6 +138,12 @@ public class DefaultListableBeanFactory extends SimpleAliasRegistry implements B
                 // 使用默认构造器创建实例
                 bean = beanClass.getDeclaredConstructor().newInstance();
                 logger.debug("Created bean '{}' using default constructor", name);
+            }
+            
+            // 如果是单例且正在创建中（可能存在循环依赖），将工厂放入三级缓存
+            if (beanDefinition.isSingleton() && isSingletonCurrentlyInCreation(name)) {
+                singletonFactories.put(name, () -> bean);
+                logger.debug("Added factory for singleton bean '{}' to third-level cache", name);
             }
             
             // 处理setter注入
@@ -129,6 +180,45 @@ public class DefaultListableBeanFactory extends SimpleAliasRegistry implements B
             throw new BeansException("Error creating bean with name '" + name + "'", e);
         }
         return bean;
+    }
+    
+    /**
+     * 将bean标记为正在创建中
+     */
+    protected void beforeSingletonCreation(String beanName) {
+        if (!singletonsCurrentlyInCreation.add(beanName)) {
+            throw new BeansException(
+                "Circular reference detected during bean creation for singleton '" + beanName + "'");
+        }
+    }
+    
+    /**
+     * 移除bean的创建中标记
+     */
+    protected void afterSingletonCreation(String beanName) {
+        if (!singletonsCurrentlyInCreation.remove(beanName)) {
+            throw new BeansException(
+                "Singleton '" + beanName + "' isn't currently in creation");
+        }
+    }
+    
+    /**
+     * 检查bean是否正在创建中
+     */
+    protected boolean isSingletonCurrentlyInCreation(String beanName) {
+        return singletonsCurrentlyInCreation.contains(beanName);
+    }
+    
+    /**
+     * 将完全初始化的bean添加到一级缓存
+     */
+    protected void addSingleton(String beanName, Object singleton) {
+        synchronized (this.singletonObjects) {
+            singletonObjects.put(beanName, singleton);
+            earlySingletonObjects.remove(beanName);
+            singletonFactories.remove(beanName);
+            logger.debug("Added singleton bean '{}' to primary cache", beanName);
+        }
     }
     
     @Override

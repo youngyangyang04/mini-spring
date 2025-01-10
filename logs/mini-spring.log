@@ -84,3 +84,17 @@
 2025-01-10 17:44:30.382 [main] DEBUG c.k.m.b.f.s.DefaultListableBeanFactory - Created bean 'simpleController' using default constructor
 2025-01-10 17:44:30.382 [main] DEBUG c.k.m.b.f.s.DefaultListableBeanFactory - Injected property 'name' of bean 'simpleController'
 2025-01-10 17:44:30.382 [main] DEBUG c.k.m.b.f.s.DefaultListableBeanFactory - Instantiated singleton bean 'simpleController'
+2025-01-10 17:49:05.334 [main] DEBUG c.k.m.b.f.s.DefaultListableBeanFactory - Registered bean definition for bean named 'circularC'
+2025-01-10 17:49:05.336 [main] DEBUG c.k.m.b.f.s.DefaultListableBeanFactory - Registered bean definition for bean named 'circularD'
+2025-01-10 17:49:05.343 [main] DEBUG c.k.m.b.f.s.DefaultListableBeanFactory - Registered bean definition for bean named 'circularA'
+2025-01-10 17:49:05.343 [main] DEBUG c.k.m.b.f.s.DefaultListableBeanFactory - Registered bean definition for bean named 'circularB'
+2025-01-10 17:49:05.344 [main] DEBUG c.k.m.b.f.s.DefaultListableBeanFactory - Created bean 'circularA' using default constructor
+2025-01-10 17:49:05.344 [main] DEBUG c.k.m.b.f.s.DefaultListableBeanFactory - Added factory for singleton bean 'circularA' to third-level cache
+2025-01-10 17:49:05.345 [main] DEBUG c.k.m.b.f.s.DefaultListableBeanFactory - Created bean 'circularB' using default constructor
+2025-01-10 17:49:05.345 [main] DEBUG c.k.m.b.f.s.DefaultListableBeanFactory - Added factory for singleton bean 'circularB' to third-level cache
+2025-01-10 17:49:05.345 [main] DEBUG c.k.m.b.f.s.DefaultListableBeanFactory - Created early reference for singleton bean 'circularA'
+2025-01-10 17:49:05.347 [main] DEBUG c.k.m.b.f.s.DefaultListableBeanFactory - Injected property 'circularA' of bean 'circularB'
+2025-01-10 17:49:05.347 [main] DEBUG c.k.m.b.f.s.DefaultListableBeanFactory - Added singleton bean 'circularB' to primary cache
+2025-01-10 17:49:05.347 [main] DEBUG c.k.m.b.f.s.DefaultListableBeanFactory - Injected property 'circularB' of bean 'circularA'
+2025-01-10 17:49:05.347 [main] DEBUG c.k.m.b.f.s.DefaultListableBeanFactory - Added singleton bean 'circularA' to primary cache
+2025-01-10 17:49:05.347 [main] DEBUG c.k.m.b.f.s.DefaultListableBeanFactory - Found singleton bean 'circularB' in primary cache
