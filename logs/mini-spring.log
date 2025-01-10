@@ -98,3 +98,30 @@
 2025-01-10 17:49:05.347 [main] DEBUG c.k.m.b.f.s.DefaultListableBeanFactory - Injected property 'circularB' of bean 'circularA'
 2025-01-10 17:49:05.347 [main] DEBUG c.k.m.b.f.s.DefaultListableBeanFactory - Added singleton bean 'circularA' to primary cache
 2025-01-10 17:49:05.347 [main] DEBUG c.k.m.b.f.s.DefaultListableBeanFactory - Found singleton bean 'circularB' in primary cache
+2025-01-10 17:59:28.974 [main] DEBUG c.k.m.core.io.ClassPathResource - Opened InputStream for class path resource [test.txt]
+2025-01-10 17:59:29.005 [main] DEBUG c.k.m.core.io.ClassPathResource - Opened InputStream for class path resource [test.txt]
+2025-01-10 18:01:02.714 [main] DEBUG c.k.m.core.io.ClassPathResource - Opened InputStream for class path resource [test.txt]
+2025-01-10 18:01:02.733 [main] DEBUG c.k.m.core.io.ClassPathResource - Opened InputStream for class path resource [com.kama.minispring.core.io.ClassPathResourceTest/test.txt]
+2025-01-10 18:01:02.738 [main] DEBUG c.k.m.core.io.ClassPathResource - Opened InputStream for class path resource [test.txt]
+2025-01-10 18:03:09.467 [main] DEBUG c.k.m.core.io.FileSystemResource - Opened InputStream for file [C:/Users/86450/AppData/Local/Temp/junit15618824740850141188/test.txt]
+2025-01-10 18:04:57.582 [main] DEBUG c.k.m.core.io.FileSystemResource - Opened InputStream for file [C:/Users/86450/AppData/Local/Temp/junit15182987646696880353/test.txt]
+2025-01-10 19:08:01.770 [main] DEBUG c.k.m.core.io.ClassPathResource - Opened InputStream for class path resource [test.txt]
+2025-01-10 19:08:01.788 [main] DEBUG c.k.m.core.io.ClassPathResource - Opened InputStream for class path resource [com.kama.minispring.core.io.ClassPathResourceTest/test.txt]
+2025-01-10 19:08:01.795 [main] DEBUG c.k.m.core.io.ClassPathResource - Opened InputStream for class path resource [test.txt]
+2025-01-10 19:08:08.852 [main] DEBUG c.k.m.core.io.FileSystemResource - Opened InputStream for file [C:/Users/86450/AppData/Local/Temp/junit10175389111203335517/test.txt]
+2025-01-10 19:08:15.703 [main] DEBUG c.k.minispring.core.io.UrlResource - Failed to check existence of file:/C:/Users/86450/AppData/Local/Temp/junit15611085283024129650/non-existing.txt: C:\Users\86450\AppData\Local\Temp\junit15611085283024129650\non-existing.txt (系统找不到指定的文件。)
+2025-01-10 19:09:34.902 [main] DEBUG c.k.minispring.core.io.UrlResource - Failed to check existence of file:/C:/Users/86450/AppData/Local/Temp/junit12837396721379113778/non-existing.txt: C:\Users\86450\AppData\Local\Temp\junit12837396721379113778\non-existing.txt (系统找不到指定的文件。)
+2025-01-10 19:09:44.968 [main] DEBUG c.k.minispring.core.io.UrlResource - Failed to check existence of file:/C:/Users/86450/AppData/Local/Temp/junit955754852616463544/non-existing.txt: C:\Users\86450\AppData\Local\Temp\junit955754852616463544\non-existing.txt (系统找不到指定的文件。)
+2025-01-10 19:12:23.387 [main] DEBUG c.k.m.core.io.UrlResourceTest - Successfully deleted test file: C:\Users\86450\AppData\Local\Temp\junit16499363918496393334\test.txt
+2025-01-10 19:12:23.515 [main] DEBUG c.k.m.core.io.UrlResourceTest - Successfully deleted test file: C:\Users\86450\AppData\Local\Temp\junit17398429055402306096\test.txt
+2025-01-10 19:12:23.630 [main] DEBUG c.k.m.core.io.UrlResourceTest - Successfully deleted test file: C:\Users\86450\AppData\Local\Temp\junit8259656135625239618\test.txt
+2025-01-10 19:12:23.745 [main] DEBUG c.k.m.core.io.UrlResourceTest - Successfully deleted test file: C:\Users\86450\AppData\Local\Temp\junit2996395639847817274\test.txt
+2025-01-10 19:12:23.861 [main] DEBUG c.k.m.core.io.UrlResourceTest - Successfully deleted test file: C:\Users\86450\AppData\Local\Temp\junit3768900805923200257\test.txt
+2025-01-10 19:12:23.865 [main] DEBUG c.k.minispring.core.io.UrlResource - Failed to check existence of file:/C:/Users/86450/AppData/Local/Temp/junit1545976309018382956/non-existing.txt: C:\Users\86450\AppData\Local\Temp\junit1545976309018382956\non-existing.txt (系统找不到指定的文件。)
+2025-01-10 19:12:23.978 [main] DEBUG c.k.m.core.io.UrlResourceTest - Successfully deleted test file: C:\Users\86450\AppData\Local\Temp\junit1545976309018382956\test.txt
+2025-01-10 19:12:24.093 [main] DEBUG c.k.m.core.io.UrlResourceTest - Successfully deleted test file: C:\Users\86450\AppData\Local\Temp\junit16681092899492198586\test.txt
+2025-01-10 19:12:24.209 [main] DEBUG c.k.m.core.io.UrlResourceTest - Successfully deleted test file: C:\Users\86450\AppData\Local\Temp\junit6562719511895576348\test.txt
+2025-01-10 19:12:24.324 [main] DEBUG c.k.m.core.io.UrlResourceTest - Successfully deleted test file: C:\Users\86450\AppData\Local\Temp\junit13239159991876068711\test.txt
+2025-01-10 19:12:24.327 [main] DEBUG c.k.m.core.io.UrlResourceTest - Tracking new resource: java.io.BufferedInputStream@16150369
+2025-01-10 19:12:24.328 [main] DEBUG c.k.m.core.io.UrlResourceTest - Successfully closed resource: java.io.BufferedInputStream@16150369
+2025-01-10 19:12:24.439 [main] DEBUG c.k.m.core.io.UrlResourceTest - Successfully deleted test file: C:\Users\86450\AppData\Local\Temp\junit15737142716241990247\test.txt
