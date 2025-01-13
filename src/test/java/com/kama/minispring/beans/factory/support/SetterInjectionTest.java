@@ -33,8 +33,7 @@ public class SetterInjectionTest {
         beanFactory.registerBeanDefinition("simpleController", controllerBeanDefinition);
         
         // 添加属性值
-        BeanDefinitionHolder holder = beanFactory.getBeanDefinitionHolder("simpleController");
-        holder.addPropertyValue(
+        controllerBeanDefinition.addPropertyValue(
             new PropertyValue("service", "simpleService", SimpleService.class)
         );
         
@@ -52,8 +51,7 @@ public class SetterInjectionTest {
         beanFactory.registerBeanDefinition("simpleController", controllerBeanDefinition);
         
         // 添加基本类型的属性值
-        BeanDefinitionHolder holder = beanFactory.getBeanDefinitionHolder("simpleController");
-        holder.addPropertyValue(
+        controllerBeanDefinition.addPropertyValue(
             new PropertyValue("name", "testName", String.class)
         );
         

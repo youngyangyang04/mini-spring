@@ -1,58 +1,32 @@
 package com.kama.minispring.beans.factory.config;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Bean定义的包装类，用于保存Bean定义及其构造参数和属性信息
- *
- * @author kama
- * @version 1.0.0
+ * BeanDefinition的持有者,包含BeanDefinition及其名称和别名
  */
 public class BeanDefinitionHolder {
     private final BeanDefinition beanDefinition;
     private final String beanName;
-    private final List<ConstructorArgumentValue> constructorArgumentValues;
-    private final List<PropertyValue> propertyValues;
+    private final String[] aliases;
 
     public BeanDefinitionHolder(BeanDefinition beanDefinition, String beanName) {
+        this(beanDefinition, beanName, null);
+    }
+
+    public BeanDefinitionHolder(BeanDefinition beanDefinition, String beanName, String[] aliases) {
         this.beanDefinition = beanDefinition;
         this.beanName = beanName;
-        this.constructorArgumentValues = new ArrayList<>();
-        this.propertyValues = new ArrayList<>();
+        this.aliases = aliases;
     }
 
     public BeanDefinition getBeanDefinition() {
-        return this.beanDefinition;
+        return beanDefinition;
     }
 
     public String getBeanName() {
-        return this.beanName;
+        return beanName;
     }
 
-    public void addConstructorArgumentValue(ConstructorArgumentValue argumentValue) {
-        this.constructorArgumentValues.add(argumentValue);
-    }
-
-    public List<ConstructorArgumentValue> getConstructorArgumentValues() {
-        return new ArrayList<>(this.constructorArgumentValues);
-    }
-
-    /**
-     * 添加一个属性值
-     *
-     * @param propertyValue 属性值
-     */
-    public void addPropertyValue(PropertyValue propertyValue) {
-        this.propertyValues.add(propertyValue);
-    }
-
-    /**
-     * 获取所有属性值
-     *
-     * @return 属性值列表
-     */
-    public List<PropertyValue> getPropertyValues() {
-        return new ArrayList<>(this.propertyValues);
+    public String[] getAliases() {
+        return aliases;
     }
 } 

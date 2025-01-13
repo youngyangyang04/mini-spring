@@ -33,9 +33,8 @@ public class ConstructorInjectionTest {
         beanFactory.registerBeanDefinition("simpleController", controllerBeanDefinition);
         
         // 添加构造器参数
-        BeanDefinitionHolder holder = beanFactory.getBeanDefinitionHolder("simpleController");
-        holder.addConstructorArgumentValue(
-            new ConstructorArgumentValue("simpleService", SimpleService.class, "service")
+        controllerBeanDefinition.addConstructorArgumentValue(
+            new ConstructorArgumentValue("simpleService", SimpleService.class)
         );
         
         // 获取并验证Bean
