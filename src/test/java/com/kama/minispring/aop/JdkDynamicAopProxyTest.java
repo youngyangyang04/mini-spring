@@ -1,8 +1,12 @@
 package com.kama.minispring.aop;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
+
 import java.lang.reflect.Method;
-import static org.junit.Assert.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 /**
  * JDK动态代理测试类
@@ -48,7 +52,7 @@ public class JdkDynamicAopProxyTest {
         // 创建AOP配置
         AdvisedSupport advisedSupport = new AdvisedSupport();
         advisedSupport.setTargetSource(new TargetSource(userService));
-        advisedSupport.setMethodInterceptor(new LoggingMethodInterceptor());
+        advisedSupport.addMethodInterceptor(new LoggingMethodInterceptor());
         advisedSupport.setMethodMatcher(new SimpleMethodMatcher());
         
         // 创建代理对象

@@ -3,12 +3,15 @@ package com.kama.minispring.aop;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
+
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * CGLIB代理实现
- * 基于CGLIB实现AOP代理
- * 
+ * Cglib代理实现
+ * 基于Cglib的代理实现
+ *
  * @author kama
  * @version 1.0.0
  */
@@ -18,7 +21,7 @@ public class CglibAopProxy implements AopProxy {
 
     /**
      * 构造函数
-     * 
+     *
      * @param advised AOP配置
      */
     public CglibAopProxy(AdvisedSupport advised) {
@@ -32,8 +35,8 @@ public class CglibAopProxy implements AopProxy {
 
     @Override
     public Object getProxy(ClassLoader classLoader) {
-        Class<?> rootClass = advised.getTargetSource().getTargetClass();
-        if (rootClass == null) {
+        Class<?> targetClass = advised.getTargetSource().getTargetClass();
+        if (targetClass == null) {
             throw new IllegalStateException("目标类不能为空");
         }
         
@@ -41,24 +44,15 @@ public class CglibAopProxy implements AopProxy {
         if (classLoader != null) {
             enhancer.setClassLoader(classLoader);
         }
-        enhancer.setSuperclass(rootClass);
-        enhancer.setCallback(new DynamicAdvisedInterceptor(advised));
-        
+        enhancer.setSuperclass(targetClass);
+        enhancer.setCallback(new CglibMethodInterceptor());
         return enhancer.create();
     }
 
     /**
-     * CGLIB方法拦截器
-     * 实现方法的拦截和增强
+     * Cglib方法拦截器
      */
-    private static class DynamicAdvisedInterceptor implements MethodInterceptor {
-
-        private final AdvisedSupport advised;
-
-        public DynamicAdvisedInterceptor(AdvisedSupport advised) {
-            this.advised = advised;
-        }
-
+    private class CglibMethodInterceptor implements MethodInterceptor {
         @Override
         public Object intercept(Object proxy, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
             Object target = advised.getTargetSource().getTarget();
@@ -69,11 +63,14 @@ public class CglibAopProxy implements AopProxy {
                 return methodProxy.invoke(target, args);
             }
 
-            // 创建方法调用对象
-            CglibMethodInvocation invocation = new CglibMethodInvocation(target, method, args, methodProxy);
+            // 创建拦截器链
+            List<com.kama.minispring.aop.MethodInterceptor> interceptors = advised.getMethodInterceptors();
+
+            // 创建方法调用
+            CglibMethodInvocation invocation = new CglibMethodInvocation(target, method, args, methodProxy, interceptors);
             
-            // 执行拦截器链
-            return advised.getMethodInterceptor().invoke(invocation);
+            // 执行方法调用链
+            return invocation.proceed();
         }
     }
 } 
