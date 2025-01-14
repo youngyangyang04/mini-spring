@@ -129,3 +129,109 @@ if (bean == null) {
 3. 在线资源:
    - Spring Framework GitHub仓库
    - Spring Framework问答社区 
+
+## 事务管理实现
+
+### 1. 核心接口设计
+- `PlatformTransactionManager`: 事务管理器接口，定义了获取事务、提交事务、回滚事务等基本操作
+- `TransactionDefinition`: 事务定义接口，包含事务的传播行为、隔离级别、超时时间等属性
+- `TransactionStatus`: 事务状态接口，用于跟踪事务的执行状态
+
+### 2. 事务同步机制
+- `TransactionSynchronization`: 定义了事务执行各个阶段的回调方法
+- `TransactionSynchronizationManager`: 使用ThreadLocal管理事务同步状态
+- 同步回调的执行顺序：
+  1. beforeBegin: 事务开始前
+  2. beforeCommit/beforeRollback: 事务提交/回滚前
+  3. afterCommit/afterRollback: 事务提交/回滚后
+  4. afterCompletion: 事务完成后
+
+### 3. 抽象事务管理器
+- `AbstractPlatformTransactionManager`: 实现了事务处理的基本流程
+- 模板方法模式：定义了doGetTransaction、doBegin、doCommit、doRollback等抽象方法
+- 处理事务同步：在事务执行的不同阶段触发同步回调
+
+### 4. JDBC事务实现
+- `DataSourceTransactionManager`: 基于数据源的事务管理器实现
+- 管理数据库连接的事务状态
+- 处理事务的提交和回滚操作
+
+### 面试要点
+1. Spring事务的实现原理
+   - 基于AOP实现声明式事务
+   - 使用ThreadLocal保证事务的隔离性
+   - 通过同步回调机制扩展事务处理流程
+
+2. 事务同步的作用
+   - 在事务执行的不同阶段执行自定义逻辑
+   - 实现缓存同步、消息发送等功能
+   - 保证数据的一致性
+
+3. 事务管理器的设计模式
+   - 模板方法模式：定义事务处理的骨架
+   - 策略模式：支持不同的事务实现
+   - 适配器模式：适配不同的事务API
+
+4. 注意事项
+   - 正确处理事务的传播行为
+   - 合理设置事务的隔离级别
+   - 注意事务超时设置
+   - 处理好事务回滚的异常 
+
+### 事务传播行为实现
+
+事务传播行为定义了事务方法和事务方法发生嵌套调用时事务如何传播。Spring 支持 7 种事务传播行为:
+
+1. PROPAGATION_REQUIRED: 如果当前没有事务,就新建一个事务,如果已经存在一个事务中,加入到这个事务中。这是最常见的选择。
+
+2. PROPAGATION_SUPPORTS: 支持当前事务,如果当前没有事务,就以非事务方式执行。
+
+3. PROPAGATION_MANDATORY: 使用当前的事务,如果当前没有事务,就抛出异常。
+
+4. PROPAGATION_REQUIRES_NEW: 新建事务,如果当前存在事务,把当前事务挂起。
+
+5. PROPAGATION_NOT_SUPPORTED: 以非事务方式执行操作,如果当前存在事务,就把当前事务挂起。
+
+6. PROPAGATION_NEVER: 以非事务方式执行,如果当前存在事务,则抛出异常。
+
+7. PROPAGATION_NESTED: 如果当前存在事务,则在嵌套事务内执行。如果当前没有事务,则执行与PROPAGATION_REQUIRED类似的操作。
+
+实现要点:
+
+1. 在 TransactionDefinition 接口中定义事务传播行为的常量。
+
+2. 在 AbstractPlatformTransactionManager 的 getTransaction 方法中实现事务传播行为的判断逻辑:
+   - 检查是否存在当前事务
+   - 根据传播行为执行相应的处理:
+     - 对于 REQUIRED,如果没有事务则创建新事务
+     - 对于 REQUIRES_NEW,总是创建新事务并挂起当前事务
+     - 对于 NESTED,在当前事务中创建保存点
+     - 对于 MANDATORY,在没有事务时抛出异常
+     - 等等
+
+3. 在 DataSourceTransactionManager 中实现:
+   - suspend 方法用于挂起当前事务
+   - resume 方法用于恢复挂起的事务
+   - 管理数据库连接的自动提交状态
+
+4. 编写测试用例验证各种传播行为:
+   - 测试 REQUIRED 传播行为
+   - 测试 REQUIRES_NEW 传播行为
+   - 测试事务挂起和恢复
+
+面试要点:
+
+1. Spring 事务传播行为的应用场景
+   - REQUIRED 适用于增删改操作
+   - REQUIRES_NEW 适用于不受外部事务影响的操作
+   - NESTED 适用于可以回滚到保存点的操作
+
+2. 事务传播行为的实现原理
+   - 基于 ThreadLocal 存储和传播事务信息
+   - 通过 事务同步管理器 管理事务资源
+   - 通过 AOP 实现事务增强
+
+3. 常见问题
+   - 事务失效的原因
+   - 事务传播行为的选择依据
+   - 分布式事务的处理 
