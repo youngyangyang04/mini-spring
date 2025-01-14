@@ -100,4 +100,27 @@ public class ModelAndView {
         this.model.clear();
         this.cleared = true;
     }
+    
+    public ModelAndView addObject(String attributeName, Object attributeValue) {
+        model.put(attributeName, attributeValue);
+        return this;
+    }
+    
+    public void addAllObjects(Map<String, ?> modelMap) {
+        if (modelMap != null) {
+            model.putAll(modelMap);
+        }
+    }
+    
+    public boolean hasView() {
+        return (this.viewName != null);
+    }
+    
+    public boolean isReference() {
+        return (this.viewName instanceof String);
+    }
+    
+    public Map<String, Object> getModel() {
+        return this.model;
+    }
 } 
