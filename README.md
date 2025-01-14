@@ -1,7 +1,6 @@
 # Mini-Spring Framework
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Java CI](https://github.com/youngyangyang04/mini-spring/workflows/Java%20CI/badge.svg)
 ![Coverage](https://img.shields.io/badge/coverage-80%25-green.svg)
 
 ## 项目简介
@@ -25,16 +24,18 @@ graph TD
 ## 项目结构
 ```
 mini-spring
-├── src/main/java/org/minispring
+├── src/main/java/com/kama/minispring
 │   ├── beans           // IoC容器核心实现
 │   ├── context         // 应用上下文
 │   ├── aop             // AOP实现
 │   ├── tx              // 事务管理
 │   ├── web             // Web MVC实现
-│   └── core            // 核心工具类
+│   ├── boot            // Spring Boot核心功能
+│   ├── cloud           // Spring Cloud集成
+│   ├── core            // 核心工具类
+│   ├── stereotype      // 注解支持
+│   └── util            // 通用工具类
 ├── src/test/java       // 测试用例
-└── docs               
-    └── tutorials       // 教程文档
 ```
 
 ## 教程目录
@@ -136,15 +137,37 @@ mini-spring
 - 练习：实现基础的服务治理
 
 ## 环境要求
-- JDK 1.8+
-- Maven 3.6+
+- JDK 17+
+- Maven 3.11.0+
 - IDE（推荐IntelliJ IDEA）
+- Git
+
+## 主要依赖版本
+- JUnit Jupiter 5.9.2
+- Mockito 5.3.1
+- SLF4J 2.0.7
+- CGLIB 3.3.0
+- AspectJ 1.9.19
+- Servlet API 4.0.1
+- Spring Test 5.3.27（仅测试用）
+
+## Maven仓库
+项目默认使用阿里云Maven仓库，提供更快的依赖下载速度。
 
 ## 快速开始
 ```bash
+# 克隆项目
 git clone https://github.com/youngyangyang04/mini-spring.git
+
+# 进入项目目录
 cd mini-spring
+
+# 编译安装
 mvn clean install
+
+# 运行示例
+cd examples/web-sample
+mvn spring-boot:run
 ```
 
 ## 文档约定
