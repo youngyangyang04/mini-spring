@@ -77,8 +77,8 @@
 - [✓] 9.1 实现DispatcherServlet
 - [✓] 9.2 实现HandlerMapping
 - [✓] 9.3 实现HandlerAdapter
-- [ ] 9.4 实现ViewResolver
-- [ ] 9.5 实现异常处理机制
+- [✓] 9.4 实现ViewResolver
+- [✓] 9.5 实现异常处理机制
 - [✓] 9.6 编写测试用例
 
 #### 10. 扩展机制
