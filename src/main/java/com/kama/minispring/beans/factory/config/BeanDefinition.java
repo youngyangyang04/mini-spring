@@ -1,11 +1,10 @@
 package com.kama.minispring.beans.factory.config;
 
-import com.kama.minispring.beans.PropertyValues;
 import java.util.List;
 
 /**
  * Bean定义接口
- * 定义了获取bean定义信息的方法
+ * 定义一个Bean的所有属性
  *
  * @author kama
  * @version 1.0.0
@@ -23,32 +22,32 @@ public interface BeanDefinition {
     String SCOPE_PROTOTYPE = "prototype";
 
     /**
-     * 获取bean的类型
+     * 设置Bean的Class对象
      *
-     * @return bean的类型
-     */
-    Class<?> getBeanClass();
-
-    /**
-     * 设置bean的类型
-     *
-     * @param beanClass bean的类型
+     * @param beanClass Bean的Class对象
      */
     void setBeanClass(Class<?> beanClass);
 
     /**
-     * 获取bean的作用域
+     * 获取Bean的Class对象
      *
-     * @return bean的作用域
+     * @return Bean的Class对象
      */
-    String getScope();
+    Class<?> getBeanClass();
 
     /**
-     * 设置bean的作用域
+     * 设置Bean的作用域
      *
-     * @param scope bean的作用域
+     * @param scope 作用域
      */
     void setScope(String scope);
+
+    /**
+     * 获取Bean的作用域
+     *
+     * @return 作用域
+     */
+    String getScope();
 
     /**
      * 判断是否是单例
@@ -65,35 +64,70 @@ public interface BeanDefinition {
     boolean isPrototype();
 
     /**
-     * 获取bean的初始化方法名
+     * 设置是否延迟初始化
      *
-     * @return 初始化方法名
+     * @param lazyInit 是否延迟初始化
      */
-    String getInitMethodName();
+    void setLazyInit(boolean lazyInit);
 
     /**
-     * 设置bean的初始化方法名
+     * 是否延迟初始化
+     *
+     * @return 如果延迟初始化返回true，否则返回false
+     */
+    boolean isLazyInit();
+
+    /**
+     * 设置初始化方法名
      *
      * @param initMethodName 初始化方法名
      */
     void setInitMethodName(String initMethodName);
 
     /**
-     * 获取bean的销毁方法名
+     * 获取初始化方法名
      *
-     * @return 销毁方法名
+     * @return 初始化方法名
      */
-    String getDestroyMethodName();
+    String getInitMethodName();
 
     /**
-     * 设置bean的销毁方法名
+     * 设置销毁方法名
      *
      * @param destroyMethodName 销毁方法名
      */
     void setDestroyMethodName(String destroyMethodName);
 
     /**
-     * 获取构造函数参数值列表
+     * 获取销毁方法名
+     *
+     * @return 销毁方法名
+     */
+    String getDestroyMethodName();
+
+    /**
+     * 设置属性值
+     *
+     * @param propertyValues 属性值对象
+     */
+    void setPropertyValues(PropertyValues propertyValues);
+
+    /**
+     * 获取属性值
+     *
+     * @return 属性值对象
+     */
+    PropertyValues getPropertyValues();
+
+    /**
+     * 添加属性值
+     *
+     * @param propertyValue 属性值
+     */
+    void addPropertyValue(PropertyValue propertyValue);
+
+    /**
+     * 获取构造函数参数值
      *
      * @return 构造函数参数值列表
      */
@@ -114,22 +148,9 @@ public interface BeanDefinition {
     boolean hasConstructorArgumentValues();
 
     /**
-     * 获取属性值列表
+     * 获取Bean的类名
      *
-     * @return 属性值列表
+     * @return Bean的类名
      */
-    PropertyValues getPropertyValues();
-
-    /**
-     * 设置属性值列表
-     *
-     * @param propertyValues 属性值列表
-     */
-    void setPropertyValues(PropertyValues propertyValues);
-
-    /**
-     * 添加属性值
-     * @param propertyValue 属性值
-     */
-    void addPropertyValue(PropertyValue propertyValue);
+    String getBeanClassName();
 } 

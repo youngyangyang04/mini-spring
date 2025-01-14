@@ -1,7 +1,7 @@
 package com.kama.minispring.beans.factory.support;
 
 import com.kama.minispring.beans.BeansException;
-import com.kama.minispring.beans.PropertyValues;
+import com.kama.minispring.beans.factory.config.PropertyValues;
 import com.kama.minispring.beans.factory.config.PropertyValue;
 import com.kama.minispring.beans.factory.config.BeanDefinition;
 import com.kama.minispring.beans.factory.DisposableBean;

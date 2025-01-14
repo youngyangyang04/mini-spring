@@ -82,11 +82,11 @@
 - [✓] 9.6 编写测试用例
 
 #### 10. 扩展机制
-- [ ] 10.1 实现BeanFactoryPostProcessor
-- [ ] 10.2 实现BeanPostProcessor
-- [ ] 10.3 实现ImportBeanDefinitionRegistrar
-- [ ] 10.4 实现条件注解
-- [ ] 10.5 编写测试用例
+- [✓] 10.1 实现BeanFactoryPostProcessor
+- [✓] 10.2 实现BeanPostProcessor
+- [✓] 10.3 实现ImportBeanDefinitionRegistrar
+- [✓] 10.4 实现条件注解
+- [✓] 10.5 编写测试用例
 
 #### 11. 集成机制
 - [ ] 11.1 实现自动配置
