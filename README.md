@@ -196,11 +196,6 @@ mvn spring-boot:run
 4. 能够回答相关面试题
 5. 具备框架开发能力
 
-## 推荐阅读
-1. 《Spring源码深度解析》
-2. 《Spring揭秘》
-3. Spring官方文档
-
 ## 如何贡献
 1. Fork 本仓库
 2. 创建新的分支 `git checkout -b feature/your-feature`
