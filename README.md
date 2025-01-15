@@ -152,22 +152,108 @@ mini-spring
 - Spring Test 5.3.27（仅测试用）
 
 ## 快速开始
+
+### 1. 获取代码
 ```bash
 # 克隆项目
 git clone https://github.com/youngyangyang04/mini-spring.git
 
 # 进入项目目录
 cd mini-spring
-
-# 编译安装
-mvn clean install
-
-# 运行示例
-cd examples/web-sample
-mvn spring-boot:run
 ```
 
+### 2. 编译运行
+```bash
+# 编译项目
+mvn clean install
+
+# 运行测试
+mvn test
+```
+
+### 3. 基础使用示例
+
+#### 3.1 创建服务类
+```java
+@Service
+public class UserService {
+    private String name;
+    
+    @Autowired
+    private OrderService orderService;
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public String getName() {
+        return name;
+    }
+}
+
+@Service
+public class OrderService {
+    public void createOrder() {
+        System.out.println("Creating order...");
+    }
+}
+```
+
+#### 3.2 创建配置类
+```java
+@EnableServiceScan("com.example")
+public class AppConfig {
+    // 配置类可以为空，服务扫描会自动注册被@Service标注的类
+}
+```
+
+#### 3.3 使用容器
+```java
+// 创建BeanFactory
+DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+
+// 注册配置类
+beanFactory.registerBeanDefinition("appConfig", 
+    BeanDefinitionBuilder.genericBeanDefinition(AppConfig.class).getBeanDefinition());
+
+// 添加注解处理器
+beanFactory.addBeanPostProcessor(new AutowiredAnnotationBeanPostProcessor());
+
+// 获取Bean
+UserService userService = beanFactory.getBean(UserService.class);
+
+// 使用Bean
+System.out.println(userService.getName());
+```
+
+### 4. 运行测试用例
+项目包含完整的测试用例，覆盖了框架的主要功能：
+- IoC容器测试
+- AOP功能测试
+- 事务管理测试
+- Web MVC测试
+- Spring Cloud集成测试
+
+可以通过IDE或命令行运行这些测试：
+```bash
+# 运行所有测试
+mvn test
+
+# 运行特定测试类
+mvn test -Dtest=DefaultListableBeanFactoryTest
+
+# 运行特定测试方法
+mvn test -Dtest=DefaultListableBeanFactoryTest#testGetBean
+```
+
+### 5. 开发建议
+- 建议使用IDE（如IntelliJ IDEA）导入项目
+- 确保已安装JDK 17及以上版本
+- 推荐使用Maven 3.11.0及以上版本
+- 运行测试前先执行`mvn clean install`
+
 ## 学习成果
+
 完成本教程后，你将：
 1. 深入理解Spring核心原理
 2. 掌握框架设计的关键技术
