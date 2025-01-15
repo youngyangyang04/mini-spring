@@ -41,21 +41,21 @@ mini-spring
 ## 教程目录
 
 ### 第一部分：IoC基础
-#### [第1章：为什么需要IoC容器？](docs/tutorials/01-why-ioc-container.md)
+#### [第1章：为什么需要IoC容器？]
 - 问题引入：传统开发方式的困境
 - IoC和DI的核心概念解析
 - 设计一个最简单的容器
 - 实现控制反转的核心步骤
 - 练习：手写简单IoC容器
 
-#### [第2章：Bean的定义与注册](docs/tutorials/02-bean-definition.md)
+#### [第2章：Bean的定义与注册]
 - 问题引入：如何描述和管理Bean？
 - BeanDefinition的设计与实现
 - Bean的命名与别名机制
 - Bean定义的注册与获取
 - 练习：实现BeanDefinition体系
 
-#### [第3章：Bean的生命周期管理](docs/tutorials/03-bean-lifecycle.md)
+#### [第3章：Bean的生命周期管理]
 - 问题引入：Bean是如何被创建和销毁的？
 - Bean的完整生命周期图解
 - 实例化策略的设计与实现
@@ -63,7 +63,7 @@ mini-spring
 - 作用域的实现
 - 练习：实现Bean生命周期管理
 
-#### [第4章：依赖注入的实现](docs/tutorials/04-dependency-injection.md)
+#### [第4章：依赖注入的实现]
 - 问题引入：如何实现依赖注入？
 - 依赖注入的实现原理
 - 构造器注入与setter注入
@@ -76,14 +76,14 @@ mini-spring
 - 练习：实现基础的依赖注入
 
 ### 第二部分：IoC高级特性
-#### [第5章：统一资源加载](docs/tutorials/05-resource-loading.md)
+#### [第5章：统一资源加载]
 - 问题引入：如何统一管理资源？
 - Resource抽象的设计
 - 配置文件的加载与解析
 - 资源加载器的实现
 - 练习：实现配置文件加载
 
-#### [第6章：应用上下文设计](docs/tutorials/06-application-context.md)
+#### [第6章：应用上下文设计]
 - 问题引入：为什么需要ApplicationContext？
 - BeanFactory与ApplicationContext
 - 事件机制的设计与实现
@@ -91,7 +91,7 @@ mini-spring
 - 练习：实现简单的应用上下文
 
 ### 第三部分：AOP和事务
-#### [第7章：AOP的设计与实现](docs/tutorials/07-aop-implementation.md)
+#### [第7章：AOP的设计与实现]
 - 问题引入：如何实现面向切面编程？
 - AOP的核心概念和原理
 - 动态代理的实现方案
@@ -102,7 +102,7 @@ mini-spring
 - 通知的织入过程
 - 练习：实现简单的AOP功能
 
-#### [第8章：声明式事务实现](docs/tutorials/08-transaction-management.md)
+#### [第8章：声明式事务实现]
 - 问题引入：如何优雅地管理事务？
 - 事务管理器的设计
 - 事务传播行为的实现
@@ -111,7 +111,7 @@ mini-spring
 - 练习：实现基础事务管理
 
 ### 第四部分：Web集成
-#### [第9章：Spring MVC的实现](docs/tutorials/09-spring-mvc.md)
+#### [第9章：Spring MVC的实现]
 - 问题引入：Web开发的困境
 - DispatcherServlet的设计与实现
 - HandlerMapping的实现
@@ -120,7 +120,7 @@ mini-spring
 - 统一异常处理机制
 - 练习：实现基础的MVC框架
 
-#### [第10章：Spring扩展机制](docs/tutorials/10-extension-mechanism.md)
+#### [第10章：Spring扩展机制]
 - 问题引入：框架扩展的困境
 - BeanFactoryPostProcessor的实现
 - BeanPostProcessor的应用
@@ -128,7 +128,7 @@ mini-spring
 - 条件注解的实现原理
 - 练习：实现自定义扩展点
 
-#### [第11章：Spring集成机制](docs/tutorials/11-spring-integration.md)
+#### [第11章：Spring集成机制]
 - 问题引入：框架集成的困境
 - 自动配置机制的实现
 - 服务注册发现的设计
