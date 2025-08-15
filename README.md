@@ -1,5 +1,9 @@
 # Mini-Spring Framework
 
+⭐️ **本项目为【代码随想录知识星球】 教学项目**   
+
+⭐️ **在 [手写Spring专栏](https://www.programmercarl.com/other/project_spring.html) 里详细讲解**：项目前置知识 + 项目细节 + 代码解读 + 项目难点 + 面试题与回答 + 简历写法 + 项目拓展。 全面帮助你用这个项目求职面试！
+
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Coverage](https://img.shields.io/badge/coverage-80%25-green.svg)
 
