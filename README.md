@@ -1,145 +1,182 @@
-# Mini-Spring Framework
 
-⭐️ **本项目为【代码随想录知识星球】 教学项目**   
+# Java项目推荐：手撕spring项目（Mini-Spring Framework）  | 代码随想录知识星球
 
-⭐️ **在 [手写Spring专栏](https://www.programmercarl.com/other/project_spring.html) 里详细讲解**：项目前置知识 + 项目细节 + 代码解读 + 项目难点 + 面试题与回答 + 简历写法 + 项目拓展。 全面帮助你用这个项目求职面试！
+> **本项目目前只在[知识星球](https://programmercarl.com/other/kstar.html)答疑并维护**。
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Coverage](https://img.shields.io/badge/coverage-80%25-green.svg)
+在25年年初，星球发布 [手写spring项目](https://mp.weixin.qq.com/s/8k8jhnJEcLIv-ukoLoFjig) 。
 
-## 项目简介
-Mini-Spring 是一个简化版的 Spring 框架，旨在帮助开发者深入理解 Spring 的核心原理和实现机制。本项目采用问题驱动的方式，通过实现核心功能模块，让学习者能够深入理解 Spring 的设计思想和实现原理。
+之后，不断对这个项目进行完善。
 
-## 学习路线图
-```mermaid
-graph TD
-    A[第一部分: IoC基础] --> B[第二部分: IoC高级特性]
-    B --> C[第三部分: AOP和事务]
-    C --> D[第四部分: Web集成]
-```
+在 25年4月份，发布了[第二版](https://mp.weixin.qq.com/s/-2Si4smwqnj3S5MziMmnJg)
 
-## 学习建议
-1. 学习之前弄懂反射和动态代理
-3. 按照顺序阅读，每个章节都建立在前面章节的基础之上
-4. 先看星球文档，后面有时间再钻研代码
+今天[知识星球](https://programmercarl.com/other/kstar.html)正式发布手写spring框架第三版。
 
-## 项目结构
-````
-mini-spring
-```
-src/main/java/com/minispring/
-├── beans
-│   ├── factory
-│   │   ├── config
-│   │   │   ├── Scope相关接口和实现
-│   │   │   └── ...
-│   │   ├── support
-│   │   └── xml
-│   ├── BeansException.java
-│   ├── PropertyValue.java
-│   ├── PropertyValues.java
-│   └── ...
-├── context
-│   ├── event
-│   ├── support
-│   ├── ApplicationContext.java
-│   └── ...
-├── core
-│   ├── io
-│   ├── convert
-│   │   ├── converter
-│   │   ├── support
-│   │   └── ...
-│   └── ...
-├── aop
-│   ├── framework
-│   ├── aspectj
-│   ├── Advisor.java
-│   ├── PointcutAdvisor.java
-│   └── ...
-├── web
-│   ├── context
-│   │   ├── request
-│   │   │   ├── RequestScope.java
-│   │   │   ├── SessionScope.java
-│   │   │   └── ...
-│   │   └── ...
-│   └── ...
-└── util
-    └── ...
-```
-````
+在第三版中，大家之前反馈的问题全部修正，同时优化了讲解思路。（第三版主要优化讲解，并未修改代码）
 
-## 环境要求
-- JDK 17+
-- Maven 3.8.1+
-- IDE（推荐IntelliJ IDEA）
-- Git
+真正做到让大家可以跟着专栏一步一步实现手写spring。
 
-## 快速开始
+同时，**[知识星球](https://programmercarl.com/other/kstar.html)里每个项目都配备专属答疑微信群，有问题在群里提问**，随时解答大家在学习这个项目时候遇到的困惑。
 
-### 1. 获取代码
-```bash
-# 克隆项目
-git clone https://github.com/youngyangyang04/mini-spring.git
+![image](https://file1.kamacoder.com/i/web/2025-08-29_11-13-34.jpg)
 
-# 进入项目目录
-cd mini-spring
-```
+## 本项目阐述
 
-### 2. 编译运行
-```bash
-# 编译项目
-mvn clean install
+实现一个min-spring框架 是一个 不错的轮子项目。
 
-# 运行测试
-mvn test
-```
+为什么推荐实现这个轮子呢，因为做完这个项目。
 
-### 3.运行测试用例
-项目包含完整的测试用例，覆盖了框架的主要功能：
-- IoC容器测试
-- AOP功能测试
-- 事务管理测试
+不仅仅是简历上多了一个硬核项目，同时你会发现 **平时自己死记硬背的spring八股文 一下子可以活学活用了**。
 
-可以通过IDE或命令行运行这些测试：
-```bash
-# 运行所有测试
-mvn test
+本项目可以结合很多八股文知识，这是和写业务项目的不同之处。
 
-# 运行特定测试类
-mvn test -Dtest=DefaultListableBeanFactoryTest
+做完本项目后，你将收获：
 
-# 运行特定测试方法
-mvn test -Dtest=DefaultListableBeanFactoryTest#testGetBean
-```
-
-### 5. 开发建议
-- 建议使用IDE（如IntelliJ IDEA）导入项目
-- 确保已安装JDK 17及以上版本
-- 推荐使用Maven 3.8.1及以上版本
-- 运行测试前先执行`mvn clean install`
-
-## 学习成果
-
-完成本教程后，你将：
+0. **简历上增加一个硬核的项目**
 1. 深入理解Spring核心原理
 2. 掌握框架设计的关键技术
 3. 提升架构设计能力
 4. 能够回答相关面试题
 5. 具备框架开发能力
 
-## 如何贡献
-1. Fork 本仓库
-2. 创建新的分支 `git checkout -b feature/your-feature`
-3. 提交你的修改 `git commit -m 'Add some feature'`
-4. 推送到分支 `git push origin feature/your-feature`
-5. 创建 Pull Request
+## 手写spring第三版教程介绍
 
-## 问题反馈
-- 在GitHub Issues中提问
-- 通过Pull Request贡献内容
-- 查看文档中的常见问题解答
+本教程共分为三个部分，**循序渐进，从基础到核心实现，再到简历与面试内容**。
 
-## 开源协议
-本项目采用 MIT 协议开源，详见 [LICENSE](LICENSE) 文件。 
+1、第一部分 · 项目基础
+
+Mini-Spring 打包与引用：主要内容为怎么将本项目运行起来，并引入到其他项目中使用。
+
+Mini-Spring 项目结构：详细解析项目中各个文件夹的作用，帮助快速定位与阅读源码。
+
+2、第二部分 · 核心实现
+
+本教程的核心内容，介绍了 IoC 与 AOP 两大模块的源码与设计思路。
+
+● IoC 容器
+
+从控制反转（IoC）到依赖注入（DI），逐步讲解 Bean 的注册、加载、注入等完整流程。
+
+● AOP 模块
+
+讲解 AOP 的底层实现，涵盖动态代理、静态代理、切点匹配、通知类型等核心机制。
+
+3、第三部分 · 项目输出
+
+简历写法：教你如何将本项目写进简历，突出亮点与技术深度。
+
+项目面试题（原理性）：总结本项目涉及的高频原理类面试题，涵盖 IoC、AOP、Bean 生命周期、代理机制等。
+
+## 专栏编写逻辑
+
+对于一个模拟 Spring 的项目来说，我们对核心内容做了极度精简
+
+在 IoC 容器 这一块，教程会先铺垫基础：**什么是控制反转（IoC）、依赖注入（DI），以及 Mini-Spring 整体的结构长什么样**。
+
+有了这些基本认知和全局视角之后，我们会用 Bean 生命周期解析流程，带你把 IoC 核心实现过一遍。
+
+**这个流程是 IoC 模块的重点，掌握了这条主线，剩下的分支逻辑你自己看也能读懂**。
+
+这样下来，你不仅能理解 Mini-Spring，还能在脑子里构建出属于自己的 Spring 框架结构图。
+
+在 AOP 模块 里，套路也差不多。
+
+我们会先把 AOP 里那些比较绕的术语概念讲明白，然后聊聊动态代理和静态代理的区别。
+
+讲静态代理的重点是**让你真正理解“什么是代理”，而动态代理更多是帮你明白“什么叫动态**”。
+
+等这两个概念理解清楚之后，第三部分的 AOP 实现解析 基本就是前两个部分的结合体，学习起来会很自然。
+
+## Mini-Spring 基于 XML 实现
+
+Mini-Spring 用于管理 Bean 的配置的实现仍然选择 XML 文件，并不是现代 Spring 常用的注解的方式。
+
+两种方式区别如下：
+
+1. XML 是显式配置：类名，属性，依赖，作用域等都需要手动配置
+2. 注解只需要通过一个 @Autowired，Spring 全都自动配置了
+
+**从学习的角度上来说，通过 XML 能更清晰的了解 Bean 是怎么一步一步生成的**，能够更好的理解 IoC 的本质，理解 BeanDefinition 的注册流程。
+
+同时，**这个流程也是本教程的最核心的主线，当这个核心的主线走完**，你会学到：
+
+1. XML 文件是怎么被定位的
+2. Bean 是怎么从 XML 文件中被解析出来的
+3. Bean 的依赖是怎么被注入的
+4. 懒加载，初始化方法，作用域如何配置
+5. 如何对外提供实例化后的对象
+
+这对理解整个 IoC 容器的原理是非常珍贵的。
+
+最后，在使用 XML 的时候，我们通常需要自己搭建容器，即以下操作：
+
+```
+ApplicationContext ctx = new ClassPathXmlApplicationContext("beans.xml");
+MyService service = ctx.getBean("myService", MyService.class);
+```
+
+在这个使用的过程中，可以知道：
+* ApplicationContext 是什么
+* 它的继承结构是什么
+* 它的子类是怎么工作的
+
+总之，**Mini-Spring 以 XML 作为 Bean 的配置文件起步，一步步实现的 IoC 容器，这个过程是一个很好的学习入口**。
+
+## 简历写法
+
+学完了本项目，简历应该怎么写，项目专栏直接给出来了：
+
+![image](https://file1.kamacoder.com/i/web/2025-08-29_10-48-48.jpg)
+
+## 面试问题
+
+很多录友做完一个项目了，不知道面试会被问到什么问题，或者说，自己就没时间写代码了 只能直接去看面试题，来突击这个项目。
+
+项目专栏给出具体面试问题和回答：
+
+![image](https://file1.kamacoder.com/i/web/2025-08-29_10-49-26.jpg)
+
+## 项目专栏详情
+
+首先，**我们要知道这个项目，如果从零搭建起来**，这对初学者很重要。
+
+![image](https://file1.kamacoder.com/i/web/2025-08-29_10-33-27.jpg)
+
+
+**项目结构怎么划分，写的代码文件应该存放在那个文件夹下，文件夹之间的关系应该怎么组织**？
+
+这是每个人在做体量稍微大一些的项目时都会遇到的问题。
+
+在我看来这个问题的难度不亚于怎么给变量取名。。。
+
+所以项目架构一定要给大家讲清楚：
+
+
+![image](https://file1.kamacoder.com/i/web/2025-08-29_10-34-48.jpg)
+
+接着就是具体内容讲解：
+
+![image](https://file1.kamacoder.com/i/web/2025-08-29_10-43-11.jpg)
+
+![image](https://file1.kamacoder.com/i/web/2025-08-29_10-44-33.jpg)
+
+![image](https://file1.kamacoder.com/i/web/2025-08-29_10-45-32.jpg)
+
+![image](https://file1.kamacoder.com/i/web/2025-08-29_10-45-32.jpg)
+
+
+## 突击来用
+
+如果大家面试在即，实在没时间做项目了，可以直接按照专栏给出的简历写法，写到简历上，然后把项目专栏里的面试问题，都认真背一背就好了，基本覆盖 绝大多数 本项目问题。
+
+## 答疑
+
+本项目在[知识星球](https://programmercarl.com/other/kstar.html)里为 文字专栏形式，大家不用担心，看不懂，星球里每个项目有专属答疑群，任何问题都可以在群里问，都会得到解答：
+
+![](https://file1.kamacoder.com/i/web/2025-09-26_11-30-13.jpg)
+
+
+## 获取本项目专栏
+
+**本文档仅为星球内部专享，大家可以加入[知识星球](https://programmercarl.com/other/kstar.html)里获取，在星球置顶一**
+
+
